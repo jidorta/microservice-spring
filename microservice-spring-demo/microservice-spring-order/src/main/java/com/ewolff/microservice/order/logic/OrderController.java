@@ -1,7 +1,8 @@
 package com.ewolff.microservice.order.logic;
 
 import java.util.Optional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,10 +65,14 @@ class OrderController {
 
 	@GetMapping("/order/{id}")
 	public ResponseEntity<Order> getJSON(@PathVariable long id) {
+        logger.info("Fetching order with id {}", id);
+
 		Optional<Order> response = orderRepository.findById(id);
 		if (response.isEmpty()) {
+            logger.warn("Order not found with id {} ", id);
 			return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
 		} else {
+            logger.info("Order found with id {} ", id);
 			return new ResponseEntity<Order>(response.get(), HttpStatus.OK);
 		}
 	}
@@ -79,12 +84,14 @@ class OrderController {
 
 	@PostMapping("/")
 	public ModelAndView post(Order order) {
+        logger.info("Creating new order");
 		order = orderService.order(order);
 		return new ModelAndView("success");
 	}
 
 	@DeleteMapping("/{id}")
 	public ModelAndView delete(@PathVariable long id) {
+        logger.info("Deleting order with id {} " ,id);
 		orderRepository.deleteById(id);
 
 		return new ModelAndView("success");
