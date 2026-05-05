@@ -1,6 +1,17 @@
 Microservice Spring Sample
 =====================
+🚧 Project Status
 
+This project is actively being improved and refactored.
+
+It was originally built following a tutorial-based microservices architecture (including YouTube references), and is now being progressively enhanced with:
+
+- Improved Docker orchestration
+- Dependency and version updates
+- Better resilience and observability setup
+- Code cleanup and modernization
+
+The goal is to evolve it into a production-ready microservices portfolio project.
 
 This demo uses [Spring Boot](https://spring.io/projects/spring-boot)
 to solve the typical problems of microservices.
