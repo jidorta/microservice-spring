@@ -1,9 +1,5 @@
 package com.ewolff.microservice.order.logic;
 
-import java.util.Optional;
-
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,90 +8,59 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.ewolff.microservice.order.customer.CustomerRepository;
-import com.ewolff.microservice.order.item.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 @Controller
-class OrderController {
+public class OrderController {
 
-	private OrderRepository orderRepository;
+	private final OrderService orderService;
 
-	private OrderService orderService;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
-	private CustomerRepository customerRepository;
-	private ItemRepository itemRepository;
-
-	public OrderController(OrderService orderService, OrderRepository orderRepository,
-			CustomerRepository customerRepository, ItemRepository itemRepository) {
-		super();
-		this.orderRepository = orderRepository;
-		this.customerRepository = customerRepository;
-		this.itemRepository = itemRepository;
-		this.orderService = orderService;
-	}
-
-	@RequestMapping("/")
+    @RequestMapping("/")
 	public ModelAndView orderList() {
-		return new ModelAndView("orderlist", "orders", orderRepository.findAll());
+        return new ModelAndView("orderlist", "orders", orderService.getAllOrders());
 	}
 
 	@GetMapping("/form.html")
 	public ModelAndView form() {
-		ModelAndView modelAndView = new ModelAndView("orderForm", "order", new Order());
-		modelAndView.addObject("items", itemRepository.findAll(Sort.unsorted()));
-		modelAndView.addObject("customers", customerRepository.findAll(Sort.unsorted()));
-		return modelAndView;
+		return orderService.getOrderForm();
 	}
 
 	@PostMapping("/line")
 	public ModelAndView addLine(Order order) {
-		order.addLine(0, itemRepository.findAll(Sort.unsorted()).iterator().next());
-		ModelAndView modelAndView = new ModelAndView("orderForm", "order", order);
-		modelAndView.addObject("items", itemRepository.findAll(Sort.unsorted()));
-		modelAndView.addObject("customers", customerRepository.findAll(Sort.unsorted()));
-		return modelAndView;
+		return orderService.addLine(order);
 	}
 
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable long id) {
-		return new ModelAndView("order", "order", orderRepository.findById(id).get());
+		return new ModelAndView("order", "order", orderService.getOrder(id));
 	}
 
-	@GetMapping("/order/{id}")
-	public ResponseEntity<Order> getJSON(@PathVariable long id) {
-        log.info("Fetching order with id {}", id);
-
-		Optional<Order> response = orderRepository.findById(id);
-		if (response.isEmpty()) {
-            log.warn("Order not found with id {} ", id);
-			return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
-		} else {
-            log.info("Order found with id {} ", id);
-			return new ResponseEntity<Order>(response.get(), HttpStatus.OK);
-		}
-	}
+    @GetMapping("/order/{id}")
+    public ResponseEntity<Order>getJSON(@PathVariable long id){
+        return orderService.getOrderResponse(id);
+    }
 
 	@GetMapping("/full-{id}")
-	public ModelAndView full(@PathVariable long id) {
-		return new ModelAndView("order-full", "order", orderRepository.findById(id).get());
+    public ModelAndView full(@PathVariable long id) {
+       return new ModelAndView("order-full","order",orderService.getOrder(id));
 	}
 
 	@PostMapping("/")
 	public ModelAndView post(Order order) {
         log.info("Creating new order");
-		order = orderService.order(order);
+		orderService.createOrder(order);
 		return new ModelAndView("success");
 	}
 
 	@DeleteMapping("/{id}")
 	public ModelAndView delete(@PathVariable long id) {
         log.info("Deleting order with id {} " ,id);
-		orderRepository.deleteById(id);
-
+		orderService.deleteOrder(id);
 		return new ModelAndView("success");
 	}
 
