@@ -2,6 +2,8 @@ package com.ewolff.microservice.order.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.repository.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

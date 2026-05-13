@@ -1,15 +1,14 @@
-package com.ewolff.microservice.order.logic;
+package com.ewolff.microservice.order.service;
 
-import java.util.Date;
 import java.util.Optional;
 
-import com.ewolff.microservice.order.customer.Customer;
-import com.ewolff.microservice.order.customer.CustomerRepository;
+import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.repository.OrderRepository;
+import com.ewolff.microservice.order.repository.CustomerRepository;
 import com.ewolff.microservice.order.item.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,10 +28,10 @@ public class OrderService {
         this.itemRepository = itemRepository;
     }
 
-    public Order getAllOrders(long id){
+    public Iterable<Order> getAllOrders(){
         log.info("Fetching all orders");
 
-        return orderRepository.findAll();
+        return  orderRepository.findAll();
 
     }
 

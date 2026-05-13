@@ -1,5 +1,7 @@
-package com.ewolff.microservice.order.logic;
+package com.ewolff.microservice.order.controller;
 
+import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,25 +43,26 @@ public class OrderController {
 	}
 
     @GetMapping("/order/{id}")
-    public ResponseEntity<Order>getJSON(@PathVariable long id){
+    public ResponseEntity<Order> getJSON(@PathVariable long id){
         return orderService.getOrderResponse(id);
     }
 
 	@GetMapping("/full-{id}")
     public ModelAndView full(@PathVariable long id) {
+
        return new ModelAndView("order-full","order",orderService.getOrder(id));
 	}
 
 	@PostMapping("/")
 	public ModelAndView post(Order order) {
-        log.info("Creating new order");
+
 		orderService.createOrder(order);
 		return new ModelAndView("success");
 	}
 
 	@DeleteMapping("/{id}")
-	public ModelAndView delete(@PathVariable long id) {
-        log.info("Deleting order with id {} " ,id);
+	public ModelAndView delete(@PathVariable long id){
+
 		orderService.deleteOrder(id);
 		return new ModelAndView("success");
 	}

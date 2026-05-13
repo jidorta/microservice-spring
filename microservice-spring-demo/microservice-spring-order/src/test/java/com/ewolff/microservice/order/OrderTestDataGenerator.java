@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import com.ewolff.microservice.order.customer.CustomerRepository;
+import com.ewolff.microservice.order.repository.CustomerRepository;
 import com.ewolff.microservice.order.customer.CustomerTestDataGenerator;
 import com.ewolff.microservice.order.item.ItemRepository;
 import com.ewolff.microservice.order.item.ItemTestDataGenerator;
 import com.ewolff.microservice.order.logic.Address;
-import com.ewolff.microservice.order.logic.Order;
-import com.ewolff.microservice.order.logic.OrderRepository;
+import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.repository.OrderRepository;
 
 @Component
 @Profile("test")

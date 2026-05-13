@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.StreamSupport;
 
+import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.repository.OrderRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -23,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.ewolff.microservice.order.OrderApp;
 import com.ewolff.microservice.order.customer.Customer;
-import com.ewolff.microservice.order.customer.CustomerRepository;
+import com.ewolff.microservice.order.repository.CustomerRepository;
 import com.ewolff.microservice.order.item.Item;
 import com.ewolff.microservice.order.item.ItemRepository;
 

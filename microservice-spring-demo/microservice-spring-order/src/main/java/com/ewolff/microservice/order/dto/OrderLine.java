@@ -1,4 +1,4 @@
-package com.ewolff.microservice.order.logic;
+package com.ewolff.microservice.order.dto;
 
 import com.ewolff.microservice.order.item.Item;
 

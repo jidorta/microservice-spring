@@ -1,5 +1,6 @@
 package com.ewolff.microservice.order.customer;
 
+import com.ewolff.microservice.order.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;

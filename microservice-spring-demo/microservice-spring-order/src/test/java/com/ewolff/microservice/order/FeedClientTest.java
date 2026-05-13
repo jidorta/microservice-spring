@@ -20,9 +20,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
-import com.ewolff.microservice.order.customer.CustomerRepository;
-import com.ewolff.microservice.order.logic.Order;
-import com.ewolff.microservice.order.logic.OrderRepository;
+import com.ewolff.microservice.order.repository.CustomerRepository;
+import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.repository.OrderRepository;
 
 @SpringBootTest(classes = OrderApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
