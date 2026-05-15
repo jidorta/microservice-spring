@@ -1,14 +1,11 @@
 package com.ewolff.microservice.order.repository;
 
 import java.util.List;
+import com.ewolff.microservice.order.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ewolff.microservice.order.customer.Customer;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
+public interface CustomerRepository extends JpaRepository<Customer,Long> {
 
-public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long>, CrudRepository<Customer, Long> {
-
-	List<Customer> findByName(@Param("name") String name);
+	List<Customer> findByName(String name);
 
 }

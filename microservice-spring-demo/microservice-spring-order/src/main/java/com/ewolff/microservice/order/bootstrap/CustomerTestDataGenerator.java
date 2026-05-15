@@ -1,11 +1,13 @@
-package com.ewolff.microservice.order.customer;
+package com.ewolff.microservice.order.bootstrap;
 
+import com.ewolff.microservice.order.entity.Customer;
 import com.ewolff.microservice.order.repository.CustomerRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-
 import jakarta.annotation.PostConstruct;
 
 @Component
+@Profile("dev")
 public class CustomerTestDataGenerator {
 
 	private final CustomerRepository customerRepository;

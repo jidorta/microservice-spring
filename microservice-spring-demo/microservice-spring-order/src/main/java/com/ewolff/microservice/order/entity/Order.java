@@ -1,14 +1,10 @@
-package com.ewolff.microservice.order.dto;
+package com.ewolff.microservice.order.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import com.ewolff.microservice.order.customer.Customer;
-import com.ewolff.microservice.order.item.Item;
-
-import com.ewolff.microservice.order.logic.Address;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CascadeType;

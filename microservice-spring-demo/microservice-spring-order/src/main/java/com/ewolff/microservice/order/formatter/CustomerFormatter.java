@@ -1,8 +1,9 @@
-package com.ewolff.microservice.order.customer;
+package com.ewolff.microservice.order.formatter;
 
 import java.text.ParseException;
 import java.util.Locale;
 
+import com.ewolff.microservice.order.entity.Customer;
 import com.ewolff.microservice.order.repository.CustomerRepository;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;

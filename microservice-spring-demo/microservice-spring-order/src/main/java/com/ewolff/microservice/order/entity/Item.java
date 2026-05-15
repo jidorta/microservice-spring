@@ -1,4 +1,4 @@
-package com.ewolff.microservice.order.item;
+package com.ewolff.microservice.order.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

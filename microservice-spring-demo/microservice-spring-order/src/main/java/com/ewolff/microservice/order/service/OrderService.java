@@ -2,7 +2,7 @@ package com.ewolff.microservice.order.service;
 
 import java.util.Optional;
 
-import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.entity.Order;
 import com.ewolff.microservice.order.repository.OrderRepository;
 import com.ewolff.microservice.order.repository.CustomerRepository;
 import com.ewolff.microservice.order.item.ItemRepository;

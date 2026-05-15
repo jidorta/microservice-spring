@@ -1,5 +1,7 @@
-package com.ewolff.microservice.order.item;
+package com.ewolff.microservice.order.bootstrap;
 
+import com.ewolff.microservice.order.entity.Item;
+import com.ewolff.microservice.order.item.ItemRepository;
 import org.springframework.stereotype.Component;
 
 @Component

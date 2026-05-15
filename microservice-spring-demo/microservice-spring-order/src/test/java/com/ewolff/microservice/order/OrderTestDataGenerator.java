@@ -7,11 +7,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.ewolff.microservice.order.repository.CustomerRepository;
-import com.ewolff.microservice.order.customer.CustomerTestDataGenerator;
+import com.ewolff.microservice.order.bootstrap.CustomerTestDataGenerator;
 import com.ewolff.microservice.order.item.ItemRepository;
-import com.ewolff.microservice.order.item.ItemTestDataGenerator;
-import com.ewolff.microservice.order.logic.Address;
-import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.bootstrap.ItemTestDataGenerator;
+import com.ewolff.microservice.order.entity.Address;
+import com.ewolff.microservice.order.entity.Order;
 import com.ewolff.microservice.order.repository.OrderRepository;
 
 @Component

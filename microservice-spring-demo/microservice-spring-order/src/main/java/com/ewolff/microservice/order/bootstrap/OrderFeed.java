@@ -1,12 +1,14 @@
-package com.ewolff.microservice.order;
+package com.ewolff.microservice.order.bootstrap;
 
+import com.ewolff.microservice.order.dto.OrderFeedEntry;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderFeed {
 
-    private Date updated;
+    private LocalDateTime updated;
 
     private List<OrderFeedEntry> orders;
 
@@ -14,17 +16,17 @@ public class OrderFeed {
         super();
     }
 
-    public OrderFeed(Date updated) {
+    public OrderFeed(LocalDateTime updated) {
         super();
         this.updated = updated;
         orders = new ArrayList<OrderFeedEntry>();
     }
 
-    public Date getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 

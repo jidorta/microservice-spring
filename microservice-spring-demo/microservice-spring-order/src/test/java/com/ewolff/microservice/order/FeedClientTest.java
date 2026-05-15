@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.ZonedDateTime;
 
+import com.ewolff.microservice.order.bootstrap.OrderFeed;
+import com.ewolff.microservice.order.dto.OrderFeedEntry;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +23,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import com.ewolff.microservice.order.repository.CustomerRepository;
-import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.entity.Order;
 import com.ewolff.microservice.order.repository.OrderRepository;
 
 @SpringBootTest(classes = OrderApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)

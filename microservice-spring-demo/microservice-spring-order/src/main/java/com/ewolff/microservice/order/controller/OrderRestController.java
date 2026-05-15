@@ -1,12 +1,10 @@
-package com.ewolff.microservice.order.logic;
+package com.ewolff.microservice.order.controller;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-import com.ewolff.microservice.order.dto.Order;
 import com.ewolff.microservice.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,12 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
-import com.ewolff.microservice.order.OrderFeed;
-import com.ewolff.microservice.order.OrderFeedEntry;
+import com.ewolff.microservice.order.bootstrap.OrderFeed;
+import com.ewolff.microservice.order.dto.OrderFeedEntry;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -36,10 +33,15 @@ public class OrderRestController {
             WebRequest webRequest,
             HttpServletRequest request){
 
-        Date lastUpdate = orderRepository.lastUpdate();
+        LocalDateTime lastUpdate = orderRepository.lastUpdate();
+
+        long lastModified = lastUpdate
+                .atZone(ZoneId.systemDefault())
+                .toInstant()
+                .toEpochMilli();
 
         if (lastUpdate != null &&
-               webRequest.checkNotModified(lastUpdate.getTime())){
+               webRequest.checkNotModified(lastModified)){
             log.trace("Not Modified returned - request with If-Modified-Since {}",
                     webRequest.getHeader(HttpHeaders.IF_MODIFIED_SINCE));
             return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();

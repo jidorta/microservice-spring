@@ -1,6 +1,6 @@
 package com.ewolff.microservice.order.controller;
 
-import com.ewolff.microservice.order.dto.Order;
+import com.ewolff.microservice.order.entity.Order;
 import com.ewolff.microservice.order.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

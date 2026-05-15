@@ -1,4 +1,4 @@
-package com.ewolff.microservice.order;
+package com.ewolff.microservice.order.dto;
 
 import java.util.Date;
 
