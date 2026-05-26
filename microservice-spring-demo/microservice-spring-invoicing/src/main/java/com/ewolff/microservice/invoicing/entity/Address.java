@@ -1,10 +1,12 @@
-package com.ewolff.microservice.invoicing;
+package com.ewolff.microservice.invoicing.entity;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
 
 @Embeddable
 public class Address {
 
+    @NotBlank
 	private String street;
 	private String zip;
 	private String city;

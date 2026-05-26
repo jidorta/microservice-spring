@@ -1,23 +1,31 @@
-package com.ewolff.microservice.invoicing;
+package com.ewolff.microservice.invoicing.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 public class InvoiceLine {
 
-	@Column(name = "F_COUNT")
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Positive
+	@Column(name = "F_COUNT",nullable = false)
 	private int count;
+
+    private BigDecimal price;
 
 	@Embedded
 	private Item item;
 
-	@Id
-	@GeneratedValue
-	private long id;
 
 	public void setCount(int count) {
 		this.count = count;
@@ -33,9 +41,24 @@ public class InvoiceLine {
 	public InvoiceLine(int count, Item item) {
 		this.count = count;
 		this.item = item;
+
 	}
 
-	public int getCount() {
+    public InvoiceLine(int count, BigDecimal price, Item item) {
+        this.count = count;
+        this.price = price;
+        this.item = item;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getCount() {
 		return count;
 	}
 
@@ -43,8 +66,10 @@ public class InvoiceLine {
 		return item;
 	}
 
-	public double totalAmount() {
-		return getCount() * getItem().getPrice();
+	public BigDecimal totalAmount() {
+
+        return item.getPrice()
+                .multiply(BigDecimal.valueOf(count));
 	}
 
 	@Override
@@ -82,6 +107,5 @@ public class InvoiceLine {
 	public String toString() {
 		return "InvoiceLine [count=" + count + ", item=" + item + ", id=" + id + "]";
 	}
-
 
 }
